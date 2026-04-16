@@ -1,0 +1,40 @@
+{
+  "name": "kafka-notify",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "producer": "nx serve producer",
+    "consumer": "nx serve consumer",
+    "producer-ui": "nx serve producer-ui",
+    "consumer-ui": "nx serve consumer-ui",
+    "admin": "tsx --tsconfig tsconfig.json libs/kafka-admin/src/cli.ts"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular/cli": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
+    "@nx/js": "^20.8.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "nx": "^20.8.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.5.0"
+  },
+  "dependencies": {
+    "@angular/animations": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
+    "@angular/router": "^19.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0",
+    "kafkajs": "^2.2.4",
+    "rxjs": "~7.8.0"
+  }
+}

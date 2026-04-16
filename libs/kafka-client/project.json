@@ -1,0 +1,7 @@
+{
+  "name": "kafka-client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/kafka-client/src",
+  "tags": ["type:lib", "scope:shared"]
+}

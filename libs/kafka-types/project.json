@@ -1,0 +1,7 @@
+{
+  "name": "kafka-types",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/kafka-types/src",
+  "tags": ["type:lib", "scope:shared"]
+}

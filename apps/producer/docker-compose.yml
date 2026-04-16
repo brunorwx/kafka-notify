@@ -1,0 +1,43 @@
+version: "3.8"
+
+networks:
+  kafka-net:
+    external: true
+
+services:
+
+  producer:
+    image: node:20-alpine
+    container_name: producer
+    working_dir: /app
+    volumes:
+      - ../../:/app
+      - node_modules:/app/node_modules
+    networks:
+      - kafka-net
+    ports:
+      - "3001:3001"
+    environment:
+      KAFKA_BROKER: kafka:29092
+      PRODUCER_PORT: 3001
+    command: sh -c "npm install && npx tsx watch apps/producer/src/main.ts"
+
+  producer-ui:
+    image: node:20-alpine
+    container_name: producer-ui
+    working_dir: /app
+    volumes:
+      - ../../:/app
+      - node_modules:/app/node_modules
+    networks:
+      - kafka-net
+    ports:
+      - "4200:4200"
+    environment:
+      API_TARGET: http://producer:3001
+    command: sh -c "npx vite apps/producer-ui --host"
+    depends_on:
+      - producer
+
+volumes:
+  node_modules:

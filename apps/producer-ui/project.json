@@ -1,0 +1,51 @@
+{
+  "name": "producer-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/producer-ui/src",
+  "tags": ["type:app", "scope:frontend"],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "options": {
+        "outputPath": "dist/apps/producer-ui",
+        "index": "apps/producer-ui/src/index.html",
+        "browser": "apps/producer-ui/src/main.ts",
+        "polyfills": [],
+        "tsConfig": "apps/producer-ui/tsconfig.app.json",
+        "styles": ["apps/producer-ui/src/styles.scss"],
+        "scripts": [],
+        "assets": []
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractLicenses": true
+        },
+        "development": {
+          "optimization": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "producer-ui:build:production"
+        },
+        "development": {
+          "buildTarget": "producer-ui:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4200,
+        "proxyConfig": "apps/producer-ui/proxy.conf.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "producer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/producer/src",
+  "tags": ["type:app", "scope:backend"],
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsx watch src/main.ts",
+        "cwd": "apps/producer",
+        "env": {
+          "PRODUCER_PORT": "3001"
+        }
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p tsconfig.json --outDir ../../dist/apps/producer",
+        "cwd": "apps/producer"
+      }
+    }
+  }
+}

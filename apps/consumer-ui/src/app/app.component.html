@@ -1,0 +1,52 @@
+<div class="layout">
+  <header>
+    <h1>Kafka Consumer</h1>
+    <div class="connection" [ngClass]="connectionStatus()">
+      <span class="dot"></span>
+      {{ connectionStatus() }}
+      @if (connectionStatus() === 'disconnected') {
+        <button class="reconnect" (click)="connect()">Reconnect</button>
+      }
+      @if (connectionStatus() === 'connected') {
+        <button class="reconnect" (click)="disconnect()">Disconnect</button>
+      }
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-value">{{ events().length }}</span>
+      <span class="stat-label">Total</span>
+    </div>
+    <div class="stat placed">
+      <span class="stat-value">{{ placedCount() }}</span>
+      <span class="stat-label">Placed</span>
+    </div>
+    <div class="stat cancelled">
+      <span class="stat-value">{{ cancelledCount() }}</span>
+      <span class="stat-label">Cancelled</span>
+    </div>
+  </div>
+
+  <main>
+    @if (events().length === 0) {
+      <p class="empty">Waiting for events&hellip;</p>
+    }
+    @for (event of events(); track event.id) {
+      <div class="event-card" [ngClass]="event.type === 'ORDER_PLACED' ? 'placed' : 'cancelled'">
+        <div class="event-header">
+          <span class="badge">{{ event.type }}</span>
+          <span class="time">{{ event.timestamp | date: 'HH:mm:ss' }}</span>
+        </div>
+        <div class="event-body">
+          <span><strong>Order</strong> {{ event.orderId }}</span>
+          <span><strong>User</strong> {{ event.userId }}</span>
+          <span><strong>Amount</strong> {{ event.totalAmount }} {{ event.currency }}</span>
+          @if (event.reason) {
+            <span><strong>Reason</strong> {{ event.reason }}</span>
+          }
+        </div>
+      </div>
+    }
+  </main>
+</div>

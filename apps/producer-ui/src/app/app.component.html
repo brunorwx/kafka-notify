@@ -1,0 +1,64 @@
+<div class="layout">
+  <header>
+    <h1>Kafka Producer</h1>
+  </header>
+
+  <main>
+    <section class="card form-card">
+      <h2>Send Event</h2>
+
+      <div class="field">
+        <label>Order ID</label>
+        <input [ngModel]="orderId()" (ngModelChange)="orderId.set($event)" />
+      </div>
+      <div class="field">
+        <label>User ID</label>
+        <input [ngModel]="userId()" (ngModelChange)="userId.set($event)" />
+      </div>
+      <div class="field">
+        <label>Total Amount</label>
+        <input
+          type="number"
+          [ngModel]="totalAmount()"
+          (ngModelChange)="totalAmount.set($event)"
+        />
+      </div>
+      <div class="field">
+        <label>Currency</label>
+        <input [ngModel]="currency()" (ngModelChange)="currency.set($event)" />
+      </div>
+      <div class="field">
+        <label>Reason (for cancellation)</label>
+        <input [ngModel]="reason()" (ngModelChange)="reason.set($event)" />
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-place" (click)="send('placed')">
+          Place Order
+        </button>
+        <button class="btn btn-cancel" (click)="send('cancelled')">
+          Cancel Order
+        </button>
+      </div>
+
+      @if (status()) {
+        <p class="status">{{ status() }}</p>
+      }
+    </section>
+
+    <section class="card history-card">
+      <h2>Sent Events ({{ history().length }})</h2>
+      @if (history().length === 0) {
+        <p class="empty">No events sent yet.</p>
+      }
+      @for (entry of history(); track entry.id) {
+        <div class="entry" [ngClass]="entry.type === 'ORDER_PLACED' ? 'placed' : 'cancelled'">
+          <span class="badge">{{ entry.type }}</span>
+          <span class="order-id">{{ entry.orderId }}</span>
+          <span class="amount">{{ entry.totalAmount }} {{ entry.currency }}</span>
+          <span class="time">{{ entry.timestamp | date: 'HH:mm:ss' }}</span>
+        </div>
+      }
+    </section>
+  </main>
+</div>

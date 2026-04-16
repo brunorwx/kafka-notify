@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@kafka-notify/kafka-types": ["../../libs/kafka-types/src/index.ts"],
+      "@kafka-notify/kafka-client": ["../../libs/kafka-client/src/index.ts"],
+      "@kafka-notify/kafka-admin": ["../../libs/kafka-admin/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}
